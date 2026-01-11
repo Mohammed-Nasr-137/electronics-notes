@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuit Simulators Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 20px;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 5px solid #4facfe;
+        }
+        
+        .section h2 {
+            color: #4facfe;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .section h3 {
+            color: #00f2fe;
+            margin: 20px 0 10px 0;
+            font-size: 1.4em;
+        }
+        
+        .section p, .section li {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .section ul {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+        }
+        
+        .flow-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #00f2fe;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .flow-box strong {
+            color: #00f2fe;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .code-box {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+            padding: 40px;
+            margin-top: 30px;
+        }
+        
+        .quiz-section h2 {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .question {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .question h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .options {
+            margin: 15px 0;
+        }
+        
+        .option {
+            background: rgba(255,255,255,0.2);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(5px);
+        }
+        
+        .answer {
+            background: rgba(255,255,255,0.25);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .answer.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .answer strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .show-answer-btn {
+            background: rgba(255,255,255,0.3);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .show-answer-btn:hover {
+            background: rgba(255,255,255,0.5);
+        }
+        
+        .correct {
+            color: #4ade80;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Circuit Simulators & IC Design Flow</h1>
+            <p>Electronics 3010 - Dr. Amr Hafez</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>🎨 Analog IC Design Flow</h2>
+                <p>The analog IC design process involves several critical steps from concept to fabrication:</p>
+                
+                <div class="flow-box">
+                    <strong>Step 1: Draw Schematic</strong>
+                    <p>Use a schematic editor to draw the circuit diagram with all components and connections.</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 2: Create Netlist</strong>
+                    <p>A code that describes the circuit in the simulator language. The netlist contains all circuit connections and component values.</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 3: Run Circuit Simulator</strong>
+                    <p>Use SPICE to simulate the circuit behavior. Models describe the behavior of each component.</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 4: Observe and Process Results</strong>
+                    <p>Analyze simulation outputs, examine effects of non-idealities and environment effects.</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 5: Modify and Iterate</strong>
+                    <p>Adjust the circuit based on results and repeat until satisfied with performance.</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 6: Draw Layout</strong>
+                    <p>Create the actual physical layout of transistors, resistors, capacitors, metal interconnects, PADs, ESD diodes, and power lines. Be careful with coupling!</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 7: Design Rule Check (DRC)</strong>
+                    <p>Verify that the layout respects design rules dictated by the foundry (spacing between diffusions, minimum metal line width, etc.).</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 8: Layout vs Schematic (LVS)</strong>
+                    <p>Create a netlist from the layout and ensure it matches the schematic netlist. They must be the same circuit!</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 9: Extract Parasitics</strong>
+                    <p>Add unintentional parasitic capacitances and resistances created in the layout to the netlist.</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 10: Simulate with Parasitics</strong>
+                    <p>Re-run simulations with extracted parasitics and fix any degradation that may have resulted.</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>Step 11: Send for Fabrication</strong>
+                    <p>Submit the final design to the foundry and pray! 🙏</p>
+                </div>
+                
+                <div class="highlight">
+                    <strong>EDA Vendors:</strong> Cadence, Mentor Graphics, Synopsys, Tanner EDA, Multisim, and others provide Electronic Design Automation tools.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🔬 SPICE Simulator</h2>
+                <h3>What is SPICE?</h3>
+                <p><strong>SPICE</strong> = Simulation Program with Integrated Circuit Emphasis</p>
+                <p>A general-purpose circuit simulation program for nonlinear DC, nonlinear transient, and linear AC analyses. Developed in the 1970s by Berkeley.</p>
+                
+                <h3>Supported Components:</h3>
+                <ul>
+                    <li>Resistors, capacitors, inductors, mutual inductors</li>
+                    <li>Independent voltage and current sources</li>
+                    <li>Several types of dependent sources</li>
+                    <li>Lossless and lossy transmission lines</li>
+                    <li>Switches, uniform distributed RC lines</li>
+                    <li>Common semiconductor devices: diode, BJT, FET</li>
+                </ul>
+                
+                <h3>How SPICE Works:</h3>
+                <ul>
+                    <li>Creates all equations describing the circuit (KCL, KVL, device equations)</li>
+                    <li>Solves all equations:
+                        <ul>
+                            <li>Linear equations → Easy! Invert the matrix</li>
+                            <li>Non-linear equations (active elements) → Solve iteratively using Newton-Raphson Method</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="highlight">
+                    <strong>Convergence Issues:</strong> Convergence is a notorious problem with simulators, especially for circuits with non-linear elements.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📊 SPICE MOS Models</h2>
+                <p>SPICE uses a variety of transistor models with different trade-offs between complexity and accuracy:</p>
+                
+                <h3>Model Levels:</h3>
+                <ul>
+                    <li><strong>Level 1:</strong> Simple model</li>
+                    <li><strong>Level 2:</strong> Simple model</li>
+                    <li><strong>Level 3:</strong> Simple model</li>
+                    <li><strong>BSIM 1:</strong> Berkeley Short-Channel IGFET Model</li>
+                    <li><strong>BSIM 2:</strong> Very elaborate model</li>
+                    <li><strong>BSIM 3:</strong> Very elaborate model</li>
+                    <li><strong>BSIM 4:</strong> Current standard, most elaborate model</li>
+                </ul>
+                
+                <h3>BSIM-4 Model Features:</h3>
+                
+                <h3>1. Body Effect</h3>
+                <p>Threshold voltage is modulated by the source-to-body voltage. Also includes dependence of V<sub>TH</sub> on length and width.</p>
+                
+                <h3>2. Velocity Saturation (Short Channel Effect)</h3>
+                <p>When the channel is short, lateral electric field is high and electrons cannot reach theoretical velocity. Current is not as high as basic equations suggest.</p>
+                <div class="code-box">I = v<sub>sat</sub> × C<sub>OX</sub> × W × (V<sub>GS</sub> - V<sub>TH</sub>)</div>
+                
+                <h3>3. Mobility Degradation (Short Channel Effect)</h3>
+                <p>When channel is short, oxide thickness decreases and transversal (vertical) electric field gets larger. This causes larger vertical scattering of carriers, confining them to a narrower channel below the oxide. May also lead to loss of some carriers into the oxide, resulting in mobility degradation.</p>
+                <div class="code-box">μ = dv/dE (Mobility = velocity/Field)</div>
+                
+                <h3>4. Combined Effects Equation</h3>
+                <div class="code-box">
+μ<sub>eff-sat</sub> = μ<sub>o</sub> / [1 + (θ + μ<sub>o</sub>/(2v<sub>sat</sub>L))(V<sub>GS</sub> - V<sub>TH</sub>)]
+<br><br>
+I = (1/2) × μ<sub>eff-sat</sub> × C<sub>OX</sub> × (W/L) × (V<sub>GS</sub> - V<sub>TH</sub>)²
+                </div>
+                <p>Where θ is mobility degradation factor (V<sup>-1</sup>), v<sub>sat</sub> is velocity saturation (m/s)</p>
+                
+                <h3>5. Drain-Induced Barrier Lowering (DIBL)</h3>
+                <ul>
+                    <li><strong>Long-channel:</strong> Depletion region from drain is far from gate/source interaction, no impact on channel creation</li>
+                    <li><strong>Short-channel:</strong> Drain depletion region affects fields and charge distribution at gate/source. Higher drain voltage reduces threshold voltage (drain helps create the channel)</li>
+                </ul>
+                
+                <h3>6. Subthreshold Conduction</h3>
+                <p>Current flow below threshold voltage shows exponential relationship with V<sub>GS</sub>.</p>
+                
+                <h3>7. Gate Oxide Tunneling</h3>
+                <p>As technology nodes advance, oxide thickness gets thinner (1nm or less). Some electrons tunnel through oxide creating gate current (Fowler-Nordheim tunneling).</p>
+                
+                <h3>8. Additional Features:</h3>
+                <ul>
+                    <li>Continuous and differentiable I-V characteristics for good convergence</li>
+                    <li>Enhanced models for diffusion capacitance and resistance</li>
+                    <li>More elaborate modeling of gate capacitances</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>🔍 Types of SPICE Analysis</h2>
+                
+                <h3>1. DC Analysis</h3>
+                <p>Standard DC operating point analysis - similar to hand calculations.</p>
+                
+                <h3>2. AC Small-Signal Analysis</h3>
+                <ul>
+                    <li>Find DC solution first</li>
+                    <li>Find linearized, small-signal gain from all inputs to output as a function of frequency</li>
+                    <li>This is a small-signal analysis (linearized)</li>
+                </ul>
+                
+                <h3>3. Transient Analysis</h3>
+                <ul>
+                    <li>Actual large-signal analysis of the circuit (no linearization)</li>
+                    <li>Circuit is solved at every timestep</li>
+                    <li>Time-consuming: need to simulate long enough to see complete period(s), yet timestep must be ~10-100 times smaller than smallest time period</li>
+                </ul>
+                
+                <h3>4. Pole-Zero Analysis</h3>
+                <p>Determines poles and zeros of transfer functions.</p>
+                
+                <h3>5. Small-Signal Distortion Analysis</h3>
+                <p>Analyzes harmonic distortion in small-signal regime.</p>
+                
+                <h3>6. Sensitivity Analysis</h3>
+                <p>Determines how circuit performance changes with component variations.</p>
+                
+                <h3>7. Noise Analysis</h3>
+                <p>AC analysis with noise added to sources and elements (linearized).</p>
+                
+                <h3>8. PSS, PAC, Pnoise (Periodic Steady State)</h3>
+                <p><strong>Problem:</strong> What if stimulus consists of large signal plus small signal?</p>
+                <ul>
+                    <li><strong>Example 1:</strong> Mixer with large LO signal and small RF signal</li>
+                    <li><strong>Example 2:</strong> Oscillator with large oscillation but small noise signals</li>
+                    <li>Can't use AC analysis (due to large signal) or transient (too slow, doesn't account for noise)</li>
+                    <li><strong>Solution:</strong> PSS solves steady-state response over fundamental frequency, then superimposes small signal on it</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>💻 Digital IC Design Flow</h2>
+                <p>Digital design is fundamentally different from analog design - it uses a top-down approach rather than bottom-up.</p>
+                
+                <div class="highlight">
+                    <strong>Key Concept:</strong> Digital circuits are made of well-known blocks (gates). No need for custom transistor-level design. Instead, build the system from the top down!
+                </div>
+                
+                <h3>Main Steps:</h3>
+                
+                <div class="flow-box">
+                    <strong>1. Design Entry (RTL)</strong>
+                    <p>Write Hardware Description Language (VHDL or Verilog) code describing signal flow from register to register.</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>2. Simulation/Verification</strong>
+                    <p>EDA tools simulate RTL and verify functionality (e.g., Conformal from Cadence). Also estimate power consumption (e.g., Joules from Cadence).</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>3. Synthesis</strong>
+                    <p>Convert RTL into gates (NANDs, NORs, Flip-Flops, etc.) using standard cells from technology library. Tool automatically optimizes logic (e.g., Genus from Cadence).</p>
+                    <ul>
+                        <li>Timing verification (e.g., Tempus from Cadence)</li>
+                        <li>Power integrity check (e.g., Voltus from Cadence)</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>4. Automatic Place & Route (APR)</strong>
+                    <p>Each gate is replaced by its standard cell (pre-laid-out transistors). Tool automatically places cells, routes metal interconnects and power rails, and optimizes clock tree (e.g., Innovus from Cadence). Many iterations needed to meet timing.</p>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>5. Gate-Level Simulations</strong>
+                    <p>More accurate simulations on gate-level netlist (e.g., Xcelium from Cadence). Captures effects missed in RTL:</p>
+                    <ul>
+                        <li>More accurate delay simulations</li>
+                        <li>Interaction of multiple voltage domains</li>
+                        <li>Glitches caused by slow clock edges</li>
+                        <li>Power-on-reset sequence verification</li>
+                    </ul>
+                </div>
+                
+                <div class="flow-box">
+                    <strong>6. Tape-Out</strong>
+                    <p>Final design sent for fabrication.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📝 RTL (Register Transfer Level)</h2>
+                <p>Using Hardware Description Languages (HDL) like VHDL or Verilog, write code describing exact signal flow from one register to the next.</p>
+                
+                <h3>Example: Simple AND Gate in VHDL</h3>
+                <div class="code-box">
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity example_and is
+  port (
+    input_1 : in std_logic;
+    input_2 : in std_logic;
+    and_result : out std_logic
+  );
+end example_and;
+
+architecture rtl of example_and is
+  signal and_gate : std_logic;
+begin
+  and_gate <= input_1 and input_2;
+  and_result <= and_gate;
+end rtl;
+                </div>
+                
+                <div class="highlight">
+                    <strong>Scalability:</strong> Very complex systems can be written in RTL hierarchically, making it possible to design million-gate designs efficiently.
+                </div>
+            </div>
+        </div>
+        
+        <div class="quiz-section">
+            <h2>📝 Quiz Questions</h2>
+            
+            <!-- True/False Questions -->
+            <div class="question">
+                <h3>Q1: True or False</h3>
+                <p>In analog IC design flow, the Layout vs Schematic (LVS) check ensures the layout netlist matches the schematic netlist.</p>
+                <div class="options">
+                    <div class="option">A) True</div>
+                    <div class="option">B) False</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) Register Transfer Level</strong>
+                    <p>RTL (Register Transfer Level) describes the exact flow of signals from one register to the next using HDL languages like VHDL or Verilog. Very complex systems can be written in RTL hierarchically.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q11: Multiple Choice</h3>
+                <p>In digital design flow, what step converts RTL into gates?</p>
+                <div class="options">
+                    <div class="option">A) Verification</div>
+                    <div class="option">B) Synthesis</div>
+                    <div class="option">C) Place & Route</div>
+                    <div class="option">D) Simulation</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) Synthesis</strong>
+                    <p>Synthesis converts RTL code into basic gates (NANDs, NORs, Flip-Flops, etc.) using standard cells from the technology library. Tools like Genus from Cadence automatically optimize the logic during this process.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q12: Multiple Choice</h3>
+                <p>What is extracted during the parasitic extraction step in analog IC design?</p>
+                <div class="options">
+                    <div class="option">A) Only parasitic capacitances</div>
+                    <div class="option">B) Only parasitic resistances</div>
+                    <div class="option">C) Both parasitic capacitances and resistances</div>
+                    <div class="option">D) Gate delays only</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: C) Both parasitic capacitances and resistances</strong>
+                    <p>Parasitic extraction adds both unintentional parasitic capacitances and parasitic resistances that were created in the layout to the netlist. These must be simulated to verify the circuit still meets specifications.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q13: Multiple Choice</h3>
+                <p>Which tool type is used for automatic placement of standard cells and routing of interconnects in digital design?</p>
+                <div class="options">
+                    <div class="option">A) Synthesis tool</div>
+                    <div class="option">B) RTL simulator</div>
+                    <div class="option">C) Place & Route tool</div>
+                    <div class="option">D) Verification tool</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: C) Place & Route tool</strong>
+                    <p>Place & Route tools (e.g., Innovus from Cadence) automatically place standard cells, route metal interconnects and power rails, and optimize the clock tree. Many iterations are usually needed to meet timing requirements.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q14: Multiple Choice</h3>
+                <p>What advantage do gate-level simulations have over RTL simulations?</p>
+                <div class="options">
+                    <div class="option">A) They run faster</div>
+                    <div class="option">B) They are more accurate and capture timing effects</div>
+                    <div class="option">C) They use less memory</div>
+                    <div class="option">D) They are easier to debug</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) They are more accurate and capture timing effects</strong>
+                    <p>Gate-level simulations (e.g., using Xcelium from Cadence) are more accurate and capture effects missed in RTL: more accurate delays, interaction of voltage domains, glitches from slow clock edges, and power-on-reset sequence verification.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q15: Multiple Choice</h3>
+                <p>What causes mobility degradation in short-channel MOS transistors?</p>
+                <div class="options">
+                    <div class="option">A) High drain voltage</div>
+                    <div class="option">B) Large transversal electric field due to thin oxide</div>
+                    <div class="option">C) Low threshold voltage</div>
+                    <div class="option">D) Gate oxide tunneling</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) Large transversal electric field due to thin oxide</strong>
+                    <p>When the channel is short, oxide thickness decreases and the transversal (vertical) electric field gets larger. This causes larger vertical scattering of carriers, confining them to a narrower channel and potentially losing some carriers into the oxide, resulting in mobility degradation.</p>
+                    <strong class="correct">✓ Answer: A) True</strong>
+                    <p>LVS (Layout vs Schematic) creates a netlist from the layout and verifies it matches the schematic netlist. If they don't match, they're not the same circuit!</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q2: True or False</h3>
+                <p>SPICE can easily solve circuits with non-linear elements by simply inverting a matrix.</p>
+                <div class="options">
+                    <div class="option">A) True</div>
+                    <div class="option">B) False</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) False</strong>
+                    <p>While linear equations can be solved by inverting the matrix, non-linear equations from active elements must be solved iteratively using the Newton-Raphson Method. Convergence is a notorious problem.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q3: True or False</h3>
+                <p>Digital IC design follows a bottom-up approach, starting from individual transistors.</p>
+                <div class="options">
+                    <div class="option">A) True</div>
+                    <div class="option">B) False</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) False</strong>
+                    <p>Digital IC design follows a top-down approach. Since digital circuits are made of well-known blocks (gates), there's no need for custom transistor-level design. The system is built from the top down using standard cells.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q4: True or False</h3>
+                <p>Transient analysis in SPICE is a small-signal linearized analysis.</p>
+                <div class="options">
+                    <div class="option">A) True</div>
+                    <div class="option">B) False</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) False</strong>
+                    <p>Transient analysis is an actual large-signal analysis with no linearization. The circuit is solved at every single timestep, making it time-consuming but accurate for large signals.</p>
+                </div>
+            </div>
+
+            <!-- Multiple Choice Questions -->
+            <div class="question">
+                <h3>Q5: Multiple Choice</h3>
+                <p>What does SPICE stand for?</p>
+                <div class="options">
+                    <div class="option">A) Semiconductor Program for Integrated Circuit Engineering</div>
+                    <div class="option">B) Simulation Program with Integrated Circuit Emphasis</div>
+                    <div class="option">C) Standard Program for IC Circuit Evaluation</div>
+                    <div class="option">D) System Platform for Integrated Circuit Examination</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) Simulation Program with Integrated Circuit Emphasis</strong>
+                    <p>SPICE was developed in the 1970s by Berkeley and is a general-purpose circuit simulation program for nonlinear DC, nonlinear transient, and linear AC analyses.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q6: Multiple Choice</h3>
+                <p>Which BSIM model is the current standard and most elaborate?</p>
+                <div class="options">
+                    <div class="option">A) BSIM 1</div>
+                    <div class="option">B) BSIM 2</div>
+                    <div class="option">C) BSIM 3</div>
+                    <div class="option">D) BSIM 4</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: D) BSIM 4</strong>
+                    <p>BSIM 4 is the current standard and most elaborate MOS model in SPICE. It accounts for body effect, velocity saturation, mobility degradation, DIBL, subthreshold conduction, gate oxide tunneling, and more.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q7: Multiple Choice</h3>
+                <p>What short-channel effect causes electrons to not reach their theoretical velocity?</p>
+                <div class="options">
+                    <div class="option">A) Body effect</div>
+                    <div class="option">B) Velocity saturation</div>
+                    <div class="option">C) DIBL</div>
+                    <div class="option">D) Gate oxide tunneling</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) Velocity saturation</strong>
+                    <p>When the channel is short, the lateral electric field is high and electrons cannot reach their theoretical velocity. This means current is not as high as basic equations suggest.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q8: Multiple Choice</h3>
+                <p>What does DIBL stand for?</p>
+                <div class="options">
+                    <div class="option">A) Digital Induced Barrier Loading</div>
+                    <div class="option">B) Drain-Induced Barrier Lowering</div>
+                    <div class="option">C) Device Integration Barrier Limiting</div>
+                    <div class="option">D) Diffusion Interface Barrier Level</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: B) Drain-Induced Barrier Lowering</strong>
+                    <p>DIBL is a short-channel effect where the drain depletion region affects fields at the gate/source. Higher drain voltage leads to reduction in threshold voltage as the drain helps create the channel.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q9: Multiple Choice</h3>
+                <p>Which analysis type is used when you have both a large signal and a small signal simultaneously?</p>
+                <div class="options">
+                    <div class="option">A) AC Small-Signal Analysis</div>
+                    <div class="option">B) Transient Analysis</div>
+                    <div class="option">C) PSS (Periodic Steady State)</div>
+                    <div class="option">D) DC Analysis</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    <strong class="correct">✓ Answer: C) PSS (Periodic Steady State)</strong>
+                    <p>PSS is used for circuits like mixers (large LO + small RF) or oscillators (large oscillation + small noise). It solves the steady-state response over the fundamental frequency and then superimposes the small signal. AC analysis won't work due to large signal, and transient is too slow.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Q10: Multiple Choice</h3>
+                <p>What does RTL stand for in digital design?</p>
+                <div class="options">
+                    <div class="option">A) Real-Time Logic</div>
+                    <div class="option">B) Register Transfer Level</div>
+                    <div class="option">C) Runtime Transfer Language</div>
+                    <div class="option">D) Routing and Timing Logic</div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer">
+                    
