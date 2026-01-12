@@ -27,8 +27,15 @@
         .question { background: rgba(255,255,255,0.15); padding: 25px; border-radius: 12px; margin-bottom: 25px; backdrop-filter: blur(10px); }
         .question h3 { color: #fff; margin-bottom: 15px; font-size: 1.3em; }
         .options { margin: 15px 0; }
-        .option { background: rgba(255,255,255,0.2); padding: 12px 15px; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: all 0.3s; }
+        .option { background: rgba(255,255,255,0.2); padding: 12px 15px; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: all 0.3s; border: 2px solid transparent; }
         .option:hover { background: rgba(255,255,255,0.3); transform: translateX(5px); }
+        
+        /* Interactive States */
+        .option.correct-choice { background-color: #4ade80; color: #064e3b; border-color: #22c55e; pointer-events: none; }
+        .option.wrong-choice { background-color: #f87171; color: #7f1d1d; border-color: #ef4444; pointer-events: none; }
+        .question.answered .option { cursor: default; }
+        .question.answered .option:hover { transform: none; }
+
         .answer { background: rgba(255,255,255,0.25); padding: 15px; border-radius: 8px; margin-top: 10px; line-height: 1.6; display: none; }
         .answer.show { display: block; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
@@ -131,7 +138,10 @@
             <div class="question">
                 <h3>Q1: True or False</h3>
                 <p>In analog IC design flow, the Layout vs Schematic (LVS) check ensures the layout netlist matches the schematic netlist.</p>
-                <div class="options"><div class="option">A) True</div><div class="option">B) False</div></div>
+                <div class="options">
+                    <div class="option" data-correct="true">A) True</div>
+                    <div class="option">B) False</div>
+                </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
                     <strong class="correct">✓ Answer: A) True</strong>
@@ -142,7 +152,10 @@
             <div class="question">
                 <h3>Q2: True or False</h3>
                 <p>SPICE can easily solve circuits with non-linear elements by simply inverting a matrix.</p>
-                <div class="options"><div class="option">A) True</div><div class="option">B) False</div></div>
+                <div class="options">
+                    <div class="option">A) True</div>
+                    <div class="option" data-correct="true">B) False</div>
+                </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
                     <strong class="correct">✓ Answer: B) False</strong>
@@ -153,7 +166,10 @@
             <div class="question">
                 <h3>Q3: True or False</h3>
                 <p>Digital IC design follows a bottom-up approach, starting from individual transistors.</p>
-                <div class="options"><div class="option">A) True</div><div class="option">B) False</div></div>
+                <div class="options">
+                    <div class="option">A) True</div>
+                    <div class="option" data-correct="true">B) False</div>
+                </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
                     <strong class="correct">✓ Answer: B) False</strong>
@@ -164,7 +180,10 @@
             <div class="question">
                 <h3>Q4: True or False</h3>
                 <p>Transient analysis in SPICE is a small-signal linearized analysis.</p>
-                <div class="options"><div class="option">A) True</div><div class="option">B) False</div></div>
+                <div class="options">
+                    <div class="option">A) True</div>
+                    <div class="option" data-correct="true">B) False</div>
+                </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
                     <strong class="correct">✓ Answer: B) False</strong>
@@ -177,7 +196,7 @@
                 <p>What does SPICE stand for?</p>
                 <div class="options">
                     <div class="option">A) Semiconductor Program for Integrated Circuit Engineering</div>
-                    <div class="option">B) Simulation Program with Integrated Circuit Emphasis</div>
+                    <div class="option" data-correct="true">B) Simulation Program with Integrated Circuit Emphasis</div>
                     <div class="option">C) Standard Program for IC Circuit Evaluation</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -190,7 +209,11 @@
             <div class="question">
                 <h3>Q6: Multiple Choice</h3>
                 <p>Which BSIM model is the current standard and most elaborate?</p>
-                <div class="options"><div class="option">A) BSIM 1</div><div class="option">B) BSIM 3</div><div class="option">C) BSIM 4</div></div>
+                <div class="options">
+                    <div class="option">A) BSIM 1</div>
+                    <div class="option">B) BSIM 3</div>
+                    <div class="option" data-correct="true">C) BSIM 4</div>
+                </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
                     <strong class="correct">✓ Answer: C) BSIM 4</strong>
@@ -201,7 +224,11 @@
             <div class="question">
                 <h3>Q7: Multiple Choice</h3>
                 <p>What short-channel effect causes electrons to not reach their theoretical velocity?</p>
-                <div class="options"><div class="option">A) Body effect</div><div class="option">B) Velocity saturation</div><div class="option">C) DIBL</div></div>
+                <div class="options">
+                    <div class="option">A) Body effect</div>
+                    <div class="option" data-correct="true">B) Velocity saturation</div>
+                    <div class="option">C) DIBL</div>
+                </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
                     <strong class="correct">✓ Answer: B) Velocity saturation</strong>
@@ -214,7 +241,7 @@
                 <p>What does DIBL stand for?</p>
                 <div class="options">
                     <div class="option">A) Digital Induced Barrier Loading</div>
-                    <div class="option">B) Drain-Induced Barrier Lowering</div>
+                    <div class="option" data-correct="true">B) Drain-Induced Barrier Lowering</div>
                     <div class="option">C) Device Integration Barrier Limiting</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -230,7 +257,7 @@
                 <div class="options">
                     <div class="option">A) AC Small-Signal Analysis</div>
                     <div class="option">B) Transient Analysis</div>
-                    <div class="option">C) PSS (Periodic Steady State)</div>
+                    <div class="option" data-correct="true">C) PSS (Periodic Steady State)</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
@@ -244,7 +271,7 @@
                 <p>What does RTL stand for in digital design?</p>
                 <div class="options">
                     <div class="option">A) Real-Time Logic</div>
-                    <div class="option">B) Register Transfer Level</div>
+                    <div class="option" data-correct="true">B) Register Transfer Level</div>
                     <div class="option">C) Routing and Timing Logic</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -259,7 +286,7 @@
                 <p>In digital design flow, what step converts RTL into gates?</p>
                 <div class="options">
                     <div class="option">A) Verification</div>
-                    <div class="option">B) Synthesis</div>
+                    <div class="option" data-correct="true">B) Synthesis</div>
                     <div class="option">C) Place & Route</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -275,7 +302,7 @@
                 <div class="options">
                     <div class="option">A) Only parasitic capacitances</div>
                     <div class="option">B) Only parasitic resistances</div>
-                    <div class="option">C) Both parasitic capacitances and resistances</div>
+                    <div class="option" data-correct="true">C) Both parasitic capacitances and resistances</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
@@ -289,7 +316,7 @@
                 <p>Which tool type is used for automatic placement of standard cells and routing of interconnects?</p>
                 <div class="options">
                     <div class="option">A) Synthesis tool</div>
-                    <div class="option">B) Place & Route tool</div>
+                    <div class="option" data-correct="true">B) Place & Route tool</div>
                     <div class="option">C) Verification tool</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -304,7 +331,7 @@
                 <p>What advantage do gate-level simulations have over RTL simulations?</p>
                 <div class="options">
                     <div class="option">A) They run faster</div>
-                    <div class="option">B) They are more accurate and capture timing effects</div>
+                    <div class="option" data-correct="true">B) They are more accurate and capture timing effects</div>
                     <div class="option">C) They are easier to debug</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -319,7 +346,7 @@
                 <p>What causes mobility degradation in short-channel MOS transistors?</p>
                 <div class="options">
                     <div class="option">A) High drain voltage</div>
-                    <div class="option">B) Large transversal electric field due to thin oxide</div>
+                    <div class="option" data-correct="true">B) Large transversal electric field due to thin oxide</div>
                     <div class="option">C) Low threshold voltage</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -343,6 +370,35 @@
                 button.textContent = 'Hide Answer';
             }
         }
+
+        // Add interactive click functionality to options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                if (question.classList.contains('answered')) return; // Check if already answered
+
+                question.classList.add('answered'); // Mark question as answered
+
+                if (this.dataset.correct === "true") {
+                    this.classList.add('correct-choice');
+                } else {
+                    this.classList.add('wrong-choice');
+                    // Highlight the correct answer if wrong one was chosen
+                    const correctOption = question.querySelector('.option[data-correct="true"]');
+                    if (correctOption) correctOption.classList.add('correct-choice');
+                }
+
+                // Automatically show the answer explanation
+                const showBtn = question.querySelector('.show-answer-btn');
+                if (showBtn) {
+                     // Check if it's already shown to avoid toggling it closed
+                     const answerDiv = showBtn.nextElementSibling;
+                     if (!answerDiv.classList.contains('show')) {
+                         toggleAnswer(showBtn);
+                     }
+                }
+            });
+        });
     </script>
 </body>
 </html>
