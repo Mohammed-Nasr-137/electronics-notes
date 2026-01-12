@@ -28,9 +28,15 @@
         .question h3 { color: #333; margin-bottom: 15px; font-size: 1.2em; }
         
         .options { margin: 15px 0; }
-        .option { background: white; padding: 12px 15px; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: all 0.2s; border: 1px solid #ddd; }
+        .option { background: white; padding: 12px 15px; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; } /* Updated border */
         .option:hover { background: #eef2ff; border-color: #667eea; transform: translateX(5px); }
         
+        /* Interactive States */
+        .option.correct-choice { background-color: #dcfce7; color: #166534; border-color: #22c55e; pointer-events: none; }
+        .option.wrong-choice { background-color: #fee2e2; color: #991b1b; border-color: #ef4444; pointer-events: none; }
+        .question.answered .option { cursor: default; }
+        .question.answered .option:hover { transform: none; }
+
         .answer { background: #dcfce7; color: #166534; padding: 15px; border-radius: 8px; margin-top: 10px; line-height: 1.6; display: none; border: 1px solid #bbf7d0; }
         .answer.show { display: block; animation: fadeIn 0.5s; }
         
@@ -66,7 +72,7 @@
                 <h3>1. A transistor is best described as:</h3>
                 <div class="options">
                     <div class="option">A. A two-terminal passive device</div>
-                    <div class="option">B. A three-terminal device used as an amplifier or switch</div>
+                    <div class="option" data-correct="true">B. A three-terminal device used as an amplifier or switch</div>
                     <div class="option">C. A mechanical switching device</div>
                     <div class="option">D. A vacuum-only device</div>
                 </div>
@@ -79,7 +85,7 @@
                 <div class="options">
                     <div class="option">A. MOSFETS</div>
                     <div class="option">B. BJTs</div>
-                    <div class="option">C. Vacuum tubes</div>
+                    <div class="option" data-correct="true">C. Vacuum tubes</div>
                     <div class="option">D. ICs</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -91,7 +97,7 @@
                 <div class="options">
                     <div class="option">A. Amplifiers</div>
                     <div class="option">B. Oscillators</div>
-                    <div class="option">C. Switches</div>
+                    <div class="option" data-correct="true">C. Switches</div>
                     <div class="option">D. Rectifiers</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -102,7 +108,7 @@
                 <h3>5. The theory of electronic semiconductors was published in:</h3>
                 <div class="options">
                     <div class="option">A. 1905</div>
-                    <div class="option">B. 1931</div>
+                    <div class="option" data-correct="true">B. 1931</div>
                     <div class="option">C. 1947</div>
                     <div class="option">D. 1956</div>
                 </div>
@@ -114,7 +120,7 @@
                 <h3>7. The point-contact transistor was invented in:</h3>
                 <div class="options">
                     <div class="option">A. 1940</div>
-                    <div class="option">B. 1947</div>
+                    <div class="option" data-correct="true">B. 1947</div>
                     <div class="option">C. 1951</div>
                     <div class="option">D. 1958</div>
                 </div>
@@ -127,7 +133,7 @@
                 <div class="options">
                     <div class="option">A. Kilby and Noyce</div>
                     <div class="option">B. Atalla and Kahng</div>
-                    <div class="option">C. Shockley, Brattain, and Bardeen</div>
+                    <div class="option" data-correct="true">C. Shockley, Brattain, and Bardeen</div>
                     <div class="option">D. Moore and Gordon</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -139,7 +145,7 @@
                 <div class="options">
                     <div class="option">A. Gordon Teal</div>
                     <div class="option">B. Jack Kilby</div>
-                    <div class="option">C. William Shockley</div>
+                    <div class="option" data-correct="true">C. William Shockley</div>
                     <div class="option">D. Robert Noyce</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -151,7 +157,7 @@
                 <div class="options">
                     <div class="option">A. 1947</div>
                     <div class="option">B. 1951</div>
-                    <div class="option">C. 1954</div>
+                    <div class="option" data-correct="true">C. 1954</div>
                     <div class="option">D. 1958</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -163,7 +169,7 @@
                 <div class="options">
                     <div class="option">A. Robert Noyce</div>
                     <div class="option">B. William Shockley</div>
-                    <div class="option">C. Jack Kilby</div>
+                    <div class="option" data-correct="true">C. Jack Kilby</div>
                     <div class="option">D. Gordon Moore</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -175,7 +181,7 @@
                 <div class="options">
                     <div class="option">A. 1958</div>
                     <div class="option">B. 1960</div>
-                    <div class="option">C. 1961</div>
+                    <div class="option" data-correct="true">C. 1961</div>
                     <div class="option">D. 1965</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -187,7 +193,7 @@
                 <div class="options">
                     <div class="option">A. 1956</div>
                     <div class="option">B. 1958</div>
-                    <div class="option">C. 1960</div>
+                    <div class="option" data-correct="true">C. 1960</div>
                     <div class="option">D. 1965</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -199,7 +205,7 @@
                 <div class="options">
                     <div class="option">A. Kilby and Noyce</div>
                     <div class="option">B. Shockley and Teal</div>
-                    <div class="option">C. Atalla and Kahng</div>
+                    <div class="option" data-correct="true">C. Atalla and Kahng</div>
                     <div class="option">D. Moore and Gordon</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -211,7 +217,7 @@
                 <div class="options">
                     <div class="option">A. 1958</div>
                     <div class="option">B. 1960</div>
-                    <div class="option">C. 1963</div>
+                    <div class="option" data-correct="true">C. 1963</div>
                     <div class="option">D. 1965</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -223,7 +229,7 @@
                 <div class="options">
                     <div class="option">A. 1 year</div>
                     <div class="option">B. 18 months</div>
-                    <div class="option">C. 2 years</div>
+                    <div class="option" data-correct="true">C. 2 years</div>
                     <div class="option">D. 5 years</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -235,7 +241,7 @@
                 <div class="options">
                     <div class="option">A. 4.3 billion transistors</div>
                     <div class="option">B. 10 billion transistors</div>
-                    <div class="option">C. 20 billion transistors</div>
+                    <div class="option" data-correct="true">C. 20 billion transistors</div>
                     <div class="option">D. 42 million transistors</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -248,7 +254,7 @@
                     <div class="option">A. Class 1000</div>
                     <div class="option">B. Class 100</div>
                     <div class="option">C. Class 10</div>
-                    <div class="option">D. Class 1 or better</div>
+                    <div class="option" data-correct="true">D. Class 1 or better</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer"><strong>Correct Answer: D</strong></div>
@@ -259,7 +265,7 @@
                 <div class="options">
                     <div class="option">A. Fabrication</div>
                     <div class="option">B. Packaging</div>
-                    <div class="option">C. Design</div>
+                    <div class="option" data-correct="true">C. Design</div>
                     <div class="option">D. Testing only</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -273,7 +279,7 @@
                 <div class="options">
                     <div class="option">A. Reduce temperature</div>
                     <div class="option">B. Eliminate electrical noise</div>
-                    <div class="option">C. Minimize particle contamination</div>
+                    <div class="option" data-correct="true">C. Minimize particle contamination</div>
                     <div class="option">D. Increase humidity</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -284,7 +290,7 @@
                 <h3>6. Silicon constitutes approximately what percentage of sand?</h3>
                 <div class="options">
                     <div class="option">A. 10%</div>
-                    <div class="option">B. 25%</div>
+                    <div class="option" data-correct="true">B. 25%</div>
                     <div class="option">C. 50%</div>
                     <div class="option">D. 75%</div>
                 </div>
@@ -297,7 +303,7 @@
                 <div class="options">
                     <div class="option">A. Etching</div>
                     <div class="option">B. Deposition</div>
-                    <div class="option">C. Crystal pulling from molten silicon</div>
+                    <div class="option" data-correct="true">C. Crystal pulling from molten silicon</div>
                     <div class="option">D. Ion implantation</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -308,7 +314,7 @@
                 <h3>14. Lithography is mainly used for:</h3>
                 <div class="options">
                     <div class="option">A. Material deposition</div>
-                    <div class="option">B. Pattern definition</div>
+                    <div class="option" data-correct="true">B. Pattern definition</div>
                     <div class="option">C. Doping silicon</div>
                     <div class="option">D. Polishing wafers</div>
                 </div>
@@ -321,7 +327,7 @@
                 <div class="options">
                     <div class="option">A. A metal layer</div>
                     <div class="option">B. An insulating oxide</div>
-                    <div class="option">C. A light-sensitive polymer</div>
+                    <div class="option" data-correct="true">C. A light-sensitive polymer</div>
                     <div class="option">D. A dopant source</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -333,7 +339,7 @@
                 <div class="options">
                     <div class="option">A. Oxygen</div>
                     <div class="option">B. Argon</div>
-                    <div class="option">C. Hydrofluoric acid (HF)</div>
+                    <div class="option" data-correct="true">C. Hydrofluoric acid (HF)</div>
                     <div class="option">D. Nitrogen</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -344,7 +350,7 @@
                 <h3>20. Dry etching generally provides:</h3>
                 <div class="options">
                     <div class="option">A. Poor control</div>
-                    <div class="option">B. Better anisotropy</div>
+                    <div class="option" data-correct="true">B. Better anisotropy</div>
                     <div class="option">C. Slower processing</div>
                     <div class="option">D. Lower cost</div>
                 </div>
@@ -356,7 +362,7 @@
                 <h3>22. MEMS stands for:</h3>
                 <div class="options">
                     <div class="option">A. Micro Electronic Mechanical Systems</div>
-                    <div class="option">B. Micro ElectroMechanical Systems</div>
+                    <div class="option" data-correct="true">B. Micro ElectroMechanical Systems</div>
                     <div class="option">C. Metal Etched Mechanical Systems</div>
                     <div class="option">D. Multi Embedded Micro Systems</div>
                 </div>
@@ -369,7 +375,7 @@
                 <div class="options">
                     <div class="option">A. Uses higher temperatures</div>
                     <div class="option">B. Is less controlled</div>
-                    <div class="option">C. Uses accelerated ions</div>
+                    <div class="option" data-correct="true">C. Uses accelerated ions</div>
                     <div class="option">D. Cannot be masked</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -381,7 +387,7 @@
                 <div class="options">
                     <div class="option">A. Has lower resistance</div>
                     <div class="option">B. Melts easily</div>
-                    <div class="option">C. Enables self-aligned gates</div>
+                    <div class="option" data-correct="true">C. Enables self-aligned gates</div>
                     <div class="option">D. Is transparent</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -393,7 +399,7 @@
                 <div class="options">
                     <div class="option">A. Chemical Metal Process</div>
                     <div class="option">B. Circuit Mask Patterning</div>
-                    <div class="option">C. Chemical Mechanical Polishing</div>
+                    <div class="option" data-correct="true">C. Chemical Mechanical Polishing</div>
                     <div class="option">D. Controlled Material Planarization</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -405,7 +411,7 @@
                 <div class="options">
                     <div class="option">A. Silicon Trench Isolation</div>
                     <div class="option">B. Shallow Thermal Isolation</div>
-                    <div class="option">C. Shallow Trench Isolation</div>
+                    <div class="option" data-correct="true">C. Shallow Trench Isolation</div>
                     <div class="option">D. Surface Trench Integration</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -418,7 +424,7 @@
                 <h3>1. EDA stands for:</h3>
                 <div class="options">
                     <div class="option">A. Electrical Design Algorithm</div>
-                    <div class="option">B. Electronic Design Automation</div>
+                    <div class="option" data-correct="true">B. Electronic Design Automation</div>
                     <div class="option">C. Embedded Device Architecture</div>
                     <div class="option">D. Electronic Development Application</div>
                 </div>
@@ -430,7 +436,7 @@
                 <h3>6. SPICE stands for:</h3>
                 <div class="options">
                     <div class="option">A. Simulation Program for IC Engineering</div>
-                    <div class="option">B. Simulation Program with Integrated Circuit Emphasis</div>
+                    <div class="option" data-correct="true">B. Simulation Program with Integrated Circuit Emphasis</div>
                     <div class="option">C. System Program for Integrated Circuits</div>
                     <div class="option">D. Semiconductor Program for IC Evaluation</div>
                 </div>
@@ -443,7 +449,7 @@
                 <div class="options">
                     <div class="option">A. Matrix inversion</div>
                     <div class="option">B. Fourier transform</div>
-                    <div class="option">C. Newton-Raphson method</div>
+                    <div class="option" data-correct="true">C. Newton-Raphson method</div>
                     <div class="option">D. Laplace transform</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -456,7 +462,7 @@
                     <div class="option">A. Level 1</div>
                     <div class="option">B. Level 3</div>
                     <div class="option">C. BSIM 1</div>
-                    <div class="option">D. BSIM 4</div>
+                    <div class="option" data-correct="true">D. BSIM 4</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer"><strong>Correct Answer: D</strong></div>
@@ -465,7 +471,7 @@
             <div class="question">
                 <h3>17. DIBL stands for:</h3>
                 <div class="options">
-                    <div class="option">A. Drain-Induced Barrier Lowering</div>
+                    <div class="option" data-correct="true">A. Drain-Induced Barrier Lowering</div>
                     <div class="option">B. Diffusion-Induced Barrier Loss</div>
                     <div class="option">C. Drain Integrated Bulk Leakage</div>
                     <div class="option">D. Dynamic Induced Bias Level</div>
@@ -479,7 +485,7 @@
                 <div class="options">
                     <div class="option">A. Signals are purely DC</div>
                     <div class="option">B. Signals are small only</div>
-                    <div class="option">C. Signals include large periodic components</div>
+                    <div class="option" data-correct="true">C. Signals include large periodic components</div>
                     <div class="option">D. No noise exists</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -490,7 +496,7 @@
                 <h3>31. LVS ensures that:</h3>
                 <div class="options">
                     <div class="option">A. Layout is aesthetic</div>
-                    <div class="option">B. Layout matches schematic</div>
+                    <div class="option" data-correct="true">B. Layout matches schematic</div>
                     <div class="option">C. Transistors are fast</div>
                     <div class="option">D. Power is minimized</div>
                 </div>
@@ -503,7 +509,7 @@
                 <div class="options">
                     <div class="option">A. Bottom-up approach</div>
                     <div class="option">B. Random approach</div>
-                    <div class="option">C. Top-down approach</div>
+                    <div class="option" data-correct="true">C. Top-down approach</div>
                     <div class="option">D. Trial-and-error approach</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -514,7 +520,7 @@
                 <h3>36. RTL stands for:</h3>
                 <div class="options">
                     <div class="option">A. Register Timing Logic</div>
-                    <div class="option">B. Register Transfer Level</div>
+                    <div class="option" data-correct="true">B. Register Transfer Level</div>
                     <div class="option">C. Real-Time Logic</div>
                     <div class="option">D. Reduced Transfer Logic</div>
                 </div>
@@ -527,7 +533,7 @@
                 <div class="options">
                     <div class="option">A. Layout</div>
                     <div class="option">B. Masks</div>
-                    <div class="option">C. Logic gates</div>
+                    <div class="option" data-correct="true">C. Logic gates</div>
                     <div class="option">D. Transistors directly</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -538,7 +544,7 @@
                 <h3>46. Gate-level simulations are:</h3>
                 <div class="options">
                     <div class="option">A. Less accurate than RTL</div>
-                    <div class="option">B. More accurate than RTL</div>
+                    <div class="option" data-correct="true">B. More accurate than RTL</div>
                     <div class="option">C. Unnecessary</div>
                     <div class="option">D. Faster than RTL</div>
                 </div>
@@ -560,6 +566,35 @@
                 button.textContent = 'Hide Answer';
             }
         }
+
+        // Add interactive click functionality to options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                if (question.classList.contains('answered')) return; // Check if already answered
+
+                question.classList.add('answered'); // Mark question as answered
+
+                if (this.dataset.correct === "true") {
+                    this.classList.add('correct-choice');
+                } else {
+                    this.classList.add('wrong-choice');
+                    // Highlight the correct answer if wrong one was chosen
+                    const correctOption = question.querySelector('.option[data-correct="true"]');
+                    if (correctOption) correctOption.classList.add('correct-choice');
+                }
+
+                // Automatically show the answer explanation
+                const showBtn = question.querySelector('.show-answer-btn');
+                if (showBtn) {
+                     // Check if it's already shown to avoid toggling it closed
+                     const answerDiv = showBtn.nextElementSibling;
+                     if (!answerDiv.classList.contains('show')) {
+                         toggleAnswer(showBtn);
+                     }
+                }
+            });
+        });
     </script>
 </body>
 </html>
