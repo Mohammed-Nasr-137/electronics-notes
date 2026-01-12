@@ -32,9 +32,15 @@
         .question h3 { color: #333; margin-bottom: 15px; font-size: 1.2em; }
         
         .options { margin: 15px 0; }
-        .option { background: white; padding: 12px 15px; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: all 0.2s; border: 1px solid #ddd; }
+        .option { background: white; padding: 12px 15px; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; } /* Updated border */
         .option:hover { background: #d1fae5; border-color: #11998e; transform: translateX(5px); }
         
+        /* Interactive States */
+        .option.correct-choice { background-color: #dcfce7; color: #166534; border-color: #22c55e; pointer-events: none; }
+        .option.wrong-choice { background-color: #fee2e2; color: #991b1b; border-color: #ef4444; pointer-events: none; }
+        .question.answered .option { cursor: default; }
+        .question.answered .option:hover { transform: none; }
+
         .answer { background: #bbf7d0; color: #14532d; padding: 15px; border-radius: 8px; margin-top: 10px; line-height: 1.6; display: none; border: 1px solid #86efac; }
         .answer.show { display: block; animation: fadeIn 0.5s; }
         
@@ -67,7 +73,7 @@
                 <div class="options">
                     <div class="option">A) A battery</div>
                     <div class="option">B) A resistor</div>
-                    <div class="option">C) An amplifier or a switch</div>
+                    <div class="option" data-correct="true">C) An amplifier or a switch</div>
                     <div class="option">D) A capacitor</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -78,7 +84,7 @@
                 <h3>Q2. Before solid-state devices, transistors were mainly implemented using:</h3>
                 <div class="options">
                     <div class="option">A) Semiconductors</div>
-                    <div class="option">B) Vacuum tubes</div>
+                    <div class="option" data-correct="true">B) Vacuum tubes</div>
                     <div class="option">C) ICS</div>
                     <div class="option">D) MOSFETS</div>
                 </div>
@@ -90,7 +96,7 @@
                 <h3>Q4. The theory of electronic semiconductors was published in:</h3>
                 <div class="options">
                     <div class="option">A) 1905</div>
-                    <div class="option">B) 1931</div>
+                    <div class="option" data-correct="true">B) 1931</div>
                     <div class="option">C) 1947</div>
                     <div class="option">D) 1956</div>
                 </div>
@@ -103,7 +109,7 @@
                 <div class="options">
                     <div class="option">A) Kilby and Noyce</div>
                     <div class="option">B) Atalla and Kahng</div>
-                    <div class="option">C) Shockley, Brattain, and Bardeen</div>
+                    <div class="option" data-correct="true">C) Shockley, Brattain, and Bardeen</div>
                     <div class="option">D) Gordon Teal and Morgan Sparks</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -114,7 +120,7 @@
                 <h3>Q9. The junction transistor was conceived by:</h3>
                 <div class="options">
                     <div class="option">A) Jack Kilby</div>
-                    <div class="option">B) William Shockley</div>
+                    <div class="option" data-correct="true">B) William Shockley</div>
                     <div class="option">C) Gordon Moore</div>
                     <div class="option">D) Robert Noyce</div>
                 </div>
@@ -127,7 +133,7 @@
                 <div class="options">
                     <div class="option">A) Robert Noyce</div>
                     <div class="option">B) William Shockley</div>
-                    <div class="option">C) Jack Kilby</div>
+                    <div class="option" data-correct="true">C) Jack Kilby</div>
                     <div class="option">D) Gordon Moore</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -140,7 +146,7 @@
                     <div class="option">A) Transistors</div>
                     <div class="option">B) Capacitors</div>
                     <div class="option">C) Resistors</div>
-                    <div class="option">D) Metal interconnects</div>
+                    <div class="option" data-correct="true">D) Metal interconnects</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer"><strong>Correct Answer: D</strong></div>
@@ -151,7 +157,7 @@
                 <div class="options">
                     <div class="option">A) 1958</div>
                     <div class="option">B) 1960</div>
-                    <div class="option">C) 1963</div>
+                    <div class="option" data-correct="true">C) 1963</div>
                     <div class="option">D) 1965</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -164,7 +170,7 @@
                     <div class="option">A) Class 1000</div>
                     <div class="option">B) Class 100</div>
                     <div class="option">C) Class 10</div>
-                    <div class="option">D) Class 1 or better</div>
+                    <div class="option" data-correct="true">D) Class 1 or better</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer"><strong>Correct Answer: D</strong></div>
@@ -175,7 +181,7 @@
                 <div class="options">
                     <div class="option">A) Small</div>
                     <div class="option">B) Automated</div>
-                    <div class="option">C) Filled to capacity</div>
+                    <div class="option" data-correct="true">C) Filled to capacity</div>
                     <div class="option">D) Government funded</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -186,7 +192,7 @@
                 <h3>Q24. One motivation for the fabless model is:</h3>
                 <div class="options">
                     <div class="option">A) Lower transistor speed</div>
-                    <div class="option">B) Focus on design profitability</div>
+                    <div class="option" data-correct="true">B) Focus on design profitability</div>
                     <div class="option">C) Reduced globalization</div>
                     <div class="option">D) Increased fabrication cost</div>
                 </div>
@@ -201,7 +207,7 @@
                 <div class="options">
                     <div class="option">A) Control temperature only</div>
                     <div class="option">B) Remove moisture</div>
-                    <div class="option">C) Minimize particle contamination</div>
+                    <div class="option" data-correct="true">C) Minimize particle contamination</div>
                     <div class="option">D) Reduce power consumption</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -212,7 +218,7 @@
                 <h3>Q6. Sand contains approximately what percentage of silicon?</h3>
                 <div class="options">
                     <div class="option">A) 10%</div>
-                    <div class="option">B) 25%</div>
+                    <div class="option" data-correct="true">B) 25%</div>
                     <div class="option">C) 50%</div>
                     <div class="option">D) 75%</div>
                 </div>
@@ -225,7 +231,7 @@
                 <div class="options">
                     <div class="option">A) Chemical vapor deposition</div>
                     <div class="option">B) Ion implantation</div>
-                    <div class="option">C) A silicon seed in molten silicon</div>
+                    <div class="option" data-correct="true">C) A silicon seed in molten silicon</div>
                     <div class="option">D) Plasma etching</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -236,7 +242,7 @@
                 <h3>Q13. The process of separating individual chips from a wafer is called:</h3>
                 <div class="options">
                     <div class="option">A) Polishing</div>
-                    <div class="option">B) Dicing</div>
+                    <div class="option" data-correct="true">B) Dicing</div>
                     <div class="option">C) Etching</div>
                     <div class="option">D) Deposition</div>
                 </div>
@@ -248,7 +254,7 @@
                 <h3>Q15. Lithography is mainly used for:</h3>
                 <div class="options">
                     <div class="option">A) Doping silicon</div>
-                    <div class="option">B) Pattern definition</div>
+                    <div class="option" data-correct="true">B) Pattern definition</div>
                     <div class="option">C) Oxide growth</div>
                     <div class="option">D) Metallization</div>
                 </div>
@@ -260,7 +266,7 @@
                 <h3>Q21. Which oxidation method is faster?</h3>
                 <div class="options">
                     <div class="option">A) Dry oxidation</div>
-                    <div class="option">B) Wet oxidation</div>
+                    <div class="option" data-correct="true">B) Wet oxidation</div>
                     <div class="option">C) Plasma oxidation</div>
                     <div class="option">D) Chemical oxidation</div>
                 </div>
@@ -272,7 +278,7 @@
                 <h3>Q22. Photoresist is best described as:</h3>
                 <div class="options">
                     <div class="option">A) A metal film</div>
-                    <div class="option">B) A light-sensitive polymer</div>
+                    <div class="option" data-correct="true">B) A light-sensitive polymer</div>
                     <div class="option">C) A dopant</div>
                     <div class="option">D) An insulator</div>
                 </div>
@@ -284,7 +290,7 @@
                 <h3>Q26. Wet etching is typically:</h3>
                 <div class="options">
                     <div class="option">A) Anisotropic</div>
-                    <div class="option">B) Isotropic</div>
+                    <div class="option" data-correct="true">B) Isotropic</div>
                     <div class="option">C) Plasma-based</div>
                     <div class="option">D) Directional</div>
                 </div>
@@ -297,7 +303,7 @@
                 <div class="options">
                     <div class="option">A) Wet etching</div>
                     <div class="option">B) Chemical etching</div>
-                    <div class="option">C) Dry etching</div>
+                    <div class="option" data-correct="true">C) Dry etching</div>
                     <div class="option">D) Thermal etching</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -308,7 +314,7 @@
                 <h3>Q30. MEMS stands for:</h3>
                 <div class="options">
                     <div class="option">A) Micro Electrical Metal Systems</div>
-                    <div class="option">B) Micro ElectroMechanical Systems</div>
+                    <div class="option" data-correct="true">B) Micro ElectroMechanical Systems</div>
                     <div class="option">C) Macro ElectroMechanical Systems</div>
                     <div class="option">D) Metal Embedded Micro Systems</div>
                 </div>
@@ -320,7 +326,7 @@
                 <h3>Q32. Ion implantation differs from diffusion because it:</h3>
                 <div class="options">
                     <div class="option">A) Uses liquid chemicals</div>
-                    <div class="option">B) Uses accelerated ion beams</div>
+                    <div class="option" data-correct="true">B) Uses accelerated ion beams</div>
                     <div class="option">C) Requires no mask</div>
                     <div class="option">D) Is isotropic</div>
                 </div>
@@ -333,7 +339,7 @@
                 <div class="options">
                     <div class="option">A) Is cheaper</div>
                     <div class="option">B) Has lower resistance</div>
-                    <div class="option">C) Does not melt during processing</div>
+                    <div class="option" data-correct="true">C) Does not melt during processing</div>
                     <div class="option">D) Is transparent</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -345,7 +351,7 @@
                 <div class="options">
                     <div class="option">A) >100 nm</div>
                     <div class="option">B) ~50 nm</div>
-                    <div class="option">C) < 20 Å</div>
+                    <div class="option" data-correct="true">C) < 20 Å</div>
                     <div class="option">D) >1 µm</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -356,7 +362,7 @@
                 <h3>Q38. CMP is mainly used to:</h3>
                 <div class="options">
                     <div class="option">A) Etch silicon</div>
-                    <div class="option">B) Planarize the wafer surface</div>
+                    <div class="option" data-correct="true">B) Planarize the wafer surface</div>
                     <div class="option">C) Add dopants</div>
                     <div class="option">D) Pattern masks</div>
                 </div>
@@ -368,7 +374,7 @@
                 <h3>Q40. LOCOS isolation suffers from:</h3>
                 <div class="options">
                     <div class="option">A) High leakage</div>
-                    <div class="option">B) Bird's beak effect</div>
+                    <div class="option" data-correct="true">B) Bird's beak effect</div>
                     <div class="option">C) Poor conductivity</div>
                     <div class="option">D) Low yield</div>
                 </div>
@@ -382,7 +388,7 @@
                 <h3>Q2. A netlist is best described as:</h3>
                 <div class="options">
                     <div class="option">A) A graphical layout of the circuit</div>
-                    <div class="option">B) A code describing the circuit in simulator language</div>
+                    <div class="option" data-correct="true">B) A code describing the circuit in simulator language</div>
                     <div class="option">C) A fabrication mask</div>
                     <div class="option">D) A testbench</div>
                 </div>
@@ -394,7 +400,7 @@
                 <h3>Q6. SPICE stands for:</h3>
                 <div class="options">
                     <div class="option">A) Semiconductor Process Integrated Circuit Emulator</div>
-                    <div class="option">B) Simulation Program with Integrated Circuit Emphasis</div>
+                    <div class="option" data-correct="true">B) Simulation Program with Integrated Circuit Emphasis</div>
                     <div class="option">C) System Program for IC Evaluation</div>
                     <div class="option">D) Signal Processing IC Engine</div>
                 </div>
@@ -406,7 +412,7 @@
                 <h3>Q9. Which laws are used to generate circuit equations in SPICE?</h3>
                 <div class="options">
                     <div class="option">A) Ohm's law only</div>
-                    <div class="option">B) KCL and KVL</div>
+                    <div class="option" data-correct="true">B) KCL and KVL</div>
                     <div class="option">C) Maxwell's equations</div>
                     <div class="option">D) Kirchhoff's voltage law only</div>
                 </div>
@@ -419,7 +425,7 @@
                 <div class="options">
                     <div class="option">A) Matrix inversion</div>
                     <div class="option">B) Fourier analysis</div>
-                    <div class="option">C) Newton-Raphson method</div>
+                    <div class="option" data-correct="true">C) Newton-Raphson method</div>
                     <div class="option">D) Laplace transform</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -430,7 +436,7 @@
                 <h3>Q12. Threshold voltage variation due to source-to-body voltage is called:</h3>
                 <div class="options">
                     <div class="option">A) Velocity saturation</div>
-                    <div class="option">B) Body effect</div>
+                    <div class="option" data-correct="true">B) Body effect</div>
                     <div class="option">C) DIBL</div>
                     <div class="option">D) Mobility degradation</div>
                 </div>
@@ -442,7 +448,7 @@
                 <h3>Q15. Drain-Induced Barrier Lowering (DIBL) causes:</h3>
                 <div class="options">
                     <div class="option">A) Increase in threshold voltage</div>
-                    <div class="option">B) Reduction in threshold voltage</div>
+                    <div class="option" data-correct="true">B) Reduction in threshold voltage</div>
                     <div class="option">C) Increase in mobility</div>
                     <div class="option">D) Oxide breakdown</div>
                 </div>
@@ -455,7 +461,7 @@
                 <div class="options">
                     <div class="option">A) Frequency response</div>
                     <div class="option">B) Time-domain response</div>
-                    <div class="option">C) Operating point</div>
+                    <div class="option" data-correct="true">C) Operating point</div>
                     <div class="option">D) Noise spectrum</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -467,7 +473,7 @@
                 <div class="options">
                     <div class="option">A) Only DC signals</div>
                     <div class="option">B) Only small signals</div>
-                    <div class="option">C) Periodic large signals</div>
+                    <div class="option" data-correct="true">C) Periodic large signals</div>
                     <div class="option">D) Static behavior</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -479,7 +485,7 @@
                 <div class="options">
                     <div class="option">A) Circuit functionality is correct</div>
                     <div class="option">B) Layout matches schematic</div>
-                    <div class="option">C) Foundry rules are respected</div>
+                    <div class="option" data-correct="true">C) Foundry rules are respected</div>
                     <div class="option">D) Parasitics are minimized</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -489,7 +495,7 @@
             <div class="question">
                 <h3>Q30. RTL stands for:</h3>
                 <div class="options">
-                    <div class="option">A) Register Transfer Level</div>
+                    <div class="option" data-correct="true">A) Register Transfer Level</div>
                     <div class="option">B) Real Time Logic</div>
                     <div class="option">C) Reduced Transistor Layout</div>
                     <div class="option">D) Rapid Timing Logic</div>
@@ -502,7 +508,7 @@
                 <h3>Q33. Synthesis converts:</h3>
                 <div class="options">
                     <div class="option">A) Layout to netlist</div>
-                    <div class="option">B) RTL to logic gates</div>
+                    <div class="option" data-correct="true">B) RTL to logic gates</div>
                     <div class="option">C) Gates to transistors</div>
                     <div class="option">D) Netlist to layout</div>
                 </div>
@@ -515,7 +521,7 @@
                 <div class="options">
                     <div class="option">A) Power estimation</div>
                     <div class="option">B) Logic optimization</div>
-                    <div class="option">C) Cell placement and routing</div>
+                    <div class="option" data-correct="true">C) Cell placement and routing</div>
                     <div class="option">D) RTL verification</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -535,6 +541,35 @@
                 button.textContent = 'Hide Answer';
             }
         }
+
+        // Add interactive click functionality to options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                if (question.classList.contains('answered')) return; // Check if already answered
+
+                question.classList.add('answered'); // Mark question as answered
+
+                if (this.dataset.correct === "true") {
+                    this.classList.add('correct-choice');
+                } else {
+                    this.classList.add('wrong-choice');
+                    // Highlight the correct answer if wrong one was chosen
+                    const correctOption = question.querySelector('.option[data-correct="true"]');
+                    if (correctOption) correctOption.classList.add('correct-choice');
+                }
+
+                // Automatically show the answer explanation
+                const showBtn = question.querySelector('.show-answer-btn');
+                if (showBtn) {
+                     // Check if it's already shown to avoid toggling it closed
+                     const answerDiv = showBtn.nextElementSibling;
+                     if (!answerDiv.classList.contains('show')) {
+                         toggleAnswer(showBtn);
+                     }
+                }
+            });
+        });
     </script>
 </body>
 </html>
