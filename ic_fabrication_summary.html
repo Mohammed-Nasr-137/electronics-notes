@@ -128,12 +128,19 @@
             margin: 8px 0;
             cursor: pointer;
             transition: all 0.3s;
+            border: 2px solid transparent;
         }
         
         .option:hover {
             background: rgba(255,255,255,0.3);
             transform: translateX(5px);
         }
+        
+        /* Interactive States */
+        .option.correct-choice { background-color: #4ade80; color: #064e3b; border-color: #22c55e; pointer-events: none; }
+        .option.wrong-choice { background-color: #f87171; color: #7f1d1d; border-color: #ef4444; pointer-events: none; }
+        .question.answered .option { cursor: default; }
+        .question.answered .option:hover { transform: none; }
         
         .answer {
             background: rgba(255,255,255,0.25);
@@ -299,13 +306,12 @@
         <div class="quiz-section">
             <h2>📝 Quiz Questions</h2>
             
-            <!-- True/False Questions -->
             <div class="question">
                 <h3>Q1: True or False</h3>
                 <p>Modern semiconductor devices (less than 90nm) require Class 100 clean rooms.</p>
                 <div class="options">
                     <div class="option">A) True</div>
-                    <div class="option">B) False</div>
+                    <div class="option" data-correct="true">B) False</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
@@ -319,7 +325,7 @@
                 <p>Positive photoresist hardens when exposed to UV light.</p>
                 <div class="options">
                     <div class="option">A) True</div>
-                    <div class="option">B) False</div>
+                    <div class="option" data-correct="true">B) False</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
@@ -333,7 +339,7 @@
                 <p>STI (Shallow Trench Isolation) is an older technology compared to LOCOS.</p>
                 <div class="options">
                     <div class="option">A) True</div>
-                    <div class="option">B) False</div>
+                    <div class="option" data-correct="true">B) False</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
@@ -342,13 +348,12 @@
                 </div>
             </div>
 
-            <!-- Multiple Choice Questions -->
             <div class="question">
                 <h3>Q4: Multiple Choice</h3>
                 <p>What percentage of sand is Silicon?</p>
                 <div class="options">
                     <div class="option">A) 10%</div>
-                    <div class="option">B) 25%</div>
+                    <div class="option" data-correct="true">B) 25%</div>
                     <div class="option">C) 50%</div>
                     <div class="option">D) 75%</div>
                 </div>
@@ -365,7 +370,7 @@
                 <div class="options">
                     <div class="option">A) 300 - 500°C</div>
                     <div class="option">B) 600 - 800°C</div>
-                    <div class="option">C) 900 - 1200°C</div>
+                    <div class="option" data-correct="true">C) 900 - 1200°C</div>
                     <div class="option">D) 1500 - 2000°C</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -380,7 +385,7 @@
                 <p>What is the main advantage of the self-aligned process in CMOS transistors?</p>
                 <div class="options">
                     <div class="option">A) It reduces manufacturing cost</div>
-                    <div class="option">B) It eliminates the need for precise alignment of masks</div>
+                    <div class="option" data-correct="true">B) It eliminates the need for precise alignment of masks</div>
                     <div class="option">C) It increases the speed of transistors</div>
                     <div class="option">D) It reduces power consumption</div>
                 </div>
@@ -397,7 +402,7 @@
                 <div class="options">
                     <div class="option">A) Dry etching with plasma</div>
                     <div class="option">B) Reactive Ion Etching</div>
-                    <div class="option">C) Wet etching with HF</div>
+                    <div class="option" data-correct="true">C) Wet etching with HF</div>
                     <div class="option">D) Deep Reactive Ion Etching</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -412,7 +417,7 @@
                 <p>Why is polysilicon preferred over metal for gates?</p>
                 <div class="options">
                     <div class="option">A) It is cheaper to produce</div>
-                    <div class="option">B) It doesn't melt during later processing</div>
+                    <div class="option" data-correct="true">B) It doesn't melt during later processing</div>
                     <div class="option">C) It has better electrical conductivity</div>
                     <div class="option">D) It is easier to deposit</div>
                 </div>
@@ -429,7 +434,7 @@
                 <div class="options">
                     <div class="option">A) Creating trenches for isolation</div>
                     <div class="option">B) Depositing metal layers</div>
-                    <div class="option">C) Smoothing and planarizing the wafer surface</div>
+                    <div class="option" data-correct="true">C) Smoothing and planarizing the wafer surface</div>
                     <div class="option">D) Doping semiconductor regions</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -444,7 +449,7 @@
                 <p>What is the most widely used technique to introduce dopant impurities today?</p>
                 <div class="options">
                     <div class="option">A) Thermal diffusion</div>
-                    <div class="option">B) Ion implantation</div>
+                    <div class="option" data-correct="true">B) Ion implantation</div>
                     <div class="option">C) Chemical vapor deposition</div>
                     <div class="option">D) Physical vapor deposition</div>
                 </div>
@@ -468,6 +473,35 @@
                 button.textContent = 'Hide Answer';
             }
         }
+
+        // Add interactive click functionality to options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                if (question.classList.contains('answered')) return; // Check if already answered
+
+                question.classList.add('answered'); // Mark question as answered
+
+                if (this.dataset.correct === "true") {
+                    this.classList.add('correct-choice');
+                } else {
+                    this.classList.add('wrong-choice');
+                    // Highlight the correct answer if wrong one was chosen
+                    const correctOption = question.querySelector('.option[data-correct="true"]');
+                    if (correctOption) correctOption.classList.add('correct-choice');
+                }
+
+                // Automatically show the answer explanation
+                const showBtn = question.querySelector('.show-answer-btn');
+                if (showBtn) {
+                     // Check if it's already shown to avoid toggling it closed
+                     const answerDiv = showBtn.nextElementSibling;
+                     if (!answerDiv.classList.contains('show')) {
+                         toggleAnswer(showBtn);
+                     }
+                }
+            });
+        });
     </script>
 </body>
 </html>
