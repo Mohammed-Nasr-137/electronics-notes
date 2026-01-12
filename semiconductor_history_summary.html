@@ -145,12 +145,19 @@
             margin: 8px 0;
             cursor: pointer;
             transition: all 0.3s;
+            border: 2px solid transparent;
         }
         
         .option:hover {
             background: rgba(255,255,255,0.3);
             transform: translateX(5px);
         }
+        
+        /* Interactive States */
+        .option.correct-choice { background-color: #4ade80; color: #064e3b; border-color: #22c55e; pointer-events: none; }
+        .option.wrong-choice { background-color: #f87171; color: #7f1d1d; border-color: #ef4444; pointer-events: none; }
+        .question.answered .option { cursor: default; }
+        .question.answered .option:hover { transform: none; }
         
         .answer {
             background: rgba(255,255,255,0.25);
@@ -402,12 +409,11 @@
         <div class="quiz-section">
             <h2>📝 Quiz Questions</h2>
             
-            <!-- True/False Questions -->
             <div class="question">
                 <h3>Q1: True or False</h3>
                 <p>The point-contact transistor was invented at Bell Labs in 1947 by Shockley, Brattain, and Bardeen, who later won the Nobel Prize in Physics in 1956.</p>
                 <div class="options">
-                    <div class="option">A) True</div>
+                    <div class="option" data-correct="true">A) True</div>
                     <div class="option">B) False</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -422,7 +428,7 @@
                 <p>Jack Kilby's 1958 "Solid Circuit" at Texas Instruments included fully integrated metal interconnects.</p>
                 <div class="options">
                     <div class="option">A) True</div>
-                    <div class="option">B) False</div>
+                    <div class="option" data-correct="true">B) False</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
@@ -436,7 +442,7 @@
                 <p>Moore's Law predicts that the number of transistors on microprocessors will double every year.</p>
                 <div class="options">
                     <div class="option">A) True</div>
-                    <div class="option">B) False</div>
+                    <div class="option" data-correct="true">B) False</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
@@ -450,7 +456,7 @@
                 <p>The fabless transformation in the mid-1990s resulted in the US maintaining its monopoly on semiconductor technology.</p>
                 <div class="options">
                     <div class="option">A) True</div>
-                    <div class="option">B) False</div>
+                    <div class="option" data-correct="true">B) False</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer">
@@ -459,13 +465,12 @@
                 </div>
             </div>
 
-            <!-- Multiple Choice Questions -->
             <div class="question">
                 <h3>Q5: Multiple Choice</h3>
                 <p>When was the theory of electronic semiconductors published?</p>
                 <div class="options">
                     <div class="option">A) 1925</div>
-                    <div class="option">B) 1931</div>
+                    <div class="option" data-correct="true">B) 1931</div>
                     <div class="option">C) 1940</div>
                     <div class="option">D) 1947</div>
                 </div>
@@ -482,7 +487,7 @@
                 <div class="options">
                     <div class="option">A) Shockley and Bardeen</div>
                     <div class="option">B) Jack Kilby</div>
-                    <div class="option">C) Atalla and Kahng</div>
+                    <div class="option" data-correct="true">C) Atalla and Kahng</div>
                     <div class="option">D) Noyce</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -498,7 +503,7 @@
                 <div class="options">
                     <div class="option">A) 1μm</div>
                     <div class="option">B) 5μm</div>
-                    <div class="option">C) 10μm</div>
+                    <div class="option" data-correct="true">C) 10μm</div>
                     <div class="option">D) 20μm</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -514,7 +519,7 @@
                 <div class="options">
                     <div class="option">A) 4.3 billion</div>
                     <div class="option">B) 10 billion</div>
-                    <div class="option">C) 20 billion</div>
+                    <div class="option" data-correct="true">C) 20 billion</div>
                     <div class="option">D) 50 billion</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -530,7 +535,7 @@
                 <div class="options">
                     <div class="option">A) Class 100</div>
                     <div class="option">B) Class 10</div>
-                    <div class="option">C) Class 1 or better</div>
+                    <div class="option" data-correct="true">C) Class 1 or better</div>
                     <div class="option">D) Class 1,000</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -546,7 +551,7 @@
                 <div class="options">
                     <div class="option">A) 1958</div>
                     <div class="option">B) 1960</div>
-                    <div class="option">C) 1963</div>
+                    <div class="option" data-correct="true">C) 1963</div>
                     <div class="option">D) 1965</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -562,7 +567,7 @@
                 <div class="options">
                     <div class="option">A) Environmental concerns</div>
                     <div class="option">B) Labor shortage</div>
-                    <div class="option">C) Huge costs of fabrication facilities</div>
+                    <div class="option" data-correct="true">C) Huge costs of fabrication facilities</div>
                     <div class="option">D) Government regulations</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -578,7 +583,7 @@
                 <div class="options">
                     <div class="option">A) 1947</div>
                     <div class="option">B) 1951</div>
-                    <div class="option">C) 1955</div>
+                    <div class="option" data-correct="true">C) 1955</div>
                     <div class="option">D) 1958</div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
@@ -601,6 +606,35 @@
                 button.textContent = 'Hide Answer';
             }
         }
+
+        // Add interactive click functionality to options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const question = this.closest('.question');
+                if (question.classList.contains('answered')) return; // Check if already answered
+
+                question.classList.add('answered'); // Mark question as answered
+
+                if (this.dataset.correct === "true") {
+                    this.classList.add('correct-choice');
+                } else {
+                    this.classList.add('wrong-choice');
+                    // Highlight the correct answer if wrong one was chosen
+                    const correctOption = question.querySelector('.option[data-correct="true"]');
+                    if (correctOption) correctOption.classList.add('correct-choice');
+                }
+
+                // Automatically show the answer explanation
+                const showBtn = question.querySelector('.show-answer-btn');
+                if (showBtn) {
+                     // Check if it's already shown to avoid toggling it closed
+                     const answerDiv = showBtn.nextElementSibling;
+                     if (!answerDiv.classList.contains('show')) {
+                         toggleAnswer(showBtn);
+                     }
+                }
+            });
+        });
     </script>
 </body>
 </html>
