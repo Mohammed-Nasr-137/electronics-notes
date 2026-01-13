@@ -10,9 +10,9 @@
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
         }
         .container {
@@ -22,6 +22,9 @@
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            margin-top: 50px;
+            max-width: 600px;
+            width: 90%;
         }
         h1 { margin-bottom: 30px; }
         .link-box {
@@ -36,10 +39,26 @@
             transition: transform 0.2s;
         }
         .link-box:hover { transform: scale(1.05); }
-        /* Style for the new quiz button to make it stand out */
+        
         .quiz-link {
             background: #ffc107; /* Yellow/Gold color */
             border: 2px solid #e0a800;
+        }
+
+        /* Counter Styling */
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .counter-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -51,9 +70,25 @@
         <a href="ic_fabrication_summary.html" class="link-box">📱 IC Fabrication Process</a>
         <a href="semiconductor_history_summary.html" class="link-box">🔬 History of Semiconductors</a>
         
-        <a href="MCQ1.html" class="link-box quiz-link">📝 Full Question Bank 1 (All Lectures)</a>
-        <a href="MCQ2.html" class="link-box quiz-link">📝 Full Question Bank 2 (New Questions)</a>
+        <a href="electronics_quiz_full.html" class="link-box quiz-link">📝 Question Bank 1 (Comprehensive)</a>
+        <a href="electronics_quiz_bank_2.html" class="link-box quiz-link">📝 Question Bank 2 (New Questions)</a>
+        <a href="electronics_quiz_chatgpt.html" class="link-box quiz-link">📝 Dr. Hafez ChatGPT Questions</a>
     </div>
+
+    <div class="footer">
+        <p>Study hard & Good luck! 🚀</p>
+        <div class="counter-box">
+            👀 Visitor Count: <span id="visits">Loading...</span>
+        </div>
+    </div>
+
+    <script>
+        // This script hits a free API to track views
+        // We use a specific key 'electronics-notes-koyeb' to store the number
+        function websiteVisits(response) {
+            document.querySelector("#visits").textContent = response.value;
+        }
+    </script>
+    <script async src="https://api.countapi.xyz/hit/electronics-notes-koyeb-unique-id/visits?callback=websiteVisits"></script>
 </body>
 </html>
-
